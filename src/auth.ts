@@ -11,14 +11,4 @@ export const {
 } = NextAuth({
   adapter: PrismaAdapter(db),
   providers: [Github],
-  // callbacks: {
-  //   // usually not needed, but here fixing a bug in next-auth.js
-  //   async session({ session, user }: any) {
-  //     if (session && user) {
-  //       session.user.id = user.id;
-  //     }
-
-  //     return session;
-  //   },
-  // },
 });
