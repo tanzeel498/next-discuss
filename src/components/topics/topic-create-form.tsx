@@ -1,10 +1,11 @@
 'use client';
 
+import { useFormState } from 'react-dom';
 import { Popover, PopoverTrigger, PopoverContent } from '@nextui-org/popover';
 import { Input, Textarea } from '@nextui-org/input';
 import { Button } from '@nextui-org/button';
 import * as actions from '@/actions';
-import { useFormState } from 'react-dom';
+import FormButton from '@/components/common/form-button';
 
 export default function TopicCreateForm() {
   const [state, formAction] = useFormState(actions.createTopic, { errors: {} });
@@ -38,12 +39,12 @@ export default function TopicCreateForm() {
             />
 
             {state.errors._form ? (
-              <div className="rounded p-2 bg-red-200 border border-red-400">
+              <div className="rounded-md p-2 bg-[#f31260] border bg-opacity-15 text-xs text-[#f31260]">
                 {state.errors._form?.join(', ')}
               </div>
             ) : null}
 
-            <Button type="submit">Submit</Button>
+            <FormButton>Submit</FormButton>
           </div>
         </form>
       </PopoverContent>

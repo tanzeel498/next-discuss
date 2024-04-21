@@ -28,15 +28,12 @@ export async function createTopic(
   state: CreateTopicState,
   formData: FormData
 ): Promise<CreateTopicState> {
-  console.log(state);
-
   const result = createTopicSchema.safeParse({
     name: formData.get('name'),
     description: formData.get('description'),
   });
 
   if (!result.success) {
-    console.log(result.error.flatten().fieldErrors);
     return { errors: result.error.flatten().fieldErrors };
   }
 
