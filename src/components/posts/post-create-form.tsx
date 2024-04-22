@@ -1,46 +1,48 @@
 'use client';
 
 import { useFormState } from 'react-dom';
+import { Button } from '@nextui-org/button';
 import { Popover, PopoverTrigger, PopoverContent } from '@nextui-org/popover';
 import { Input, Textarea } from '@nextui-org/input';
-import { Button } from '@nextui-org/button';
-import * as actions from '@/actions';
 import FormButton from '@/components/common/form-button';
+import * as actions from '@/actions';
 
-export default function TopicCreateForm() {
-  const [state, formAction] = useFormState(actions.createTopic, { errors: {} });
+export default function PostCreateForm({ slug }: { slug: string }) {
+  const [state, formAction] = useFormState(
+    actions.createPost.bind(null, slug),
+    { errors: {} }
+  );
 
   return (
     <Popover placement="left-start">
       <PopoverTrigger>
-        <Button color="primary">Create a Topic</Button>
+        <Button color="primary">Create a Post</Button>
       </PopoverTrigger>
-
       <PopoverContent>
         <form action={formAction} noValidate>
           <div className="flex flex-col w-80 p-4 gap-4">
-            <h3 className="text-lg">Create a Topic</h3>
+            <h2 className="text-lg">Create a Post</h2>
 
             <Input
-              name="name"
+              name="title"
+              label="Title"
+              placeholder="Title"
               labelPlacement="outside"
-              label="Name"
-              placeholder="Name"
-              isInvalid={!!state.errors.name}
-              errorMessage={state.errors.name?.join(', ')}
+              isInvalid={!!state.errors.title}
+              errorMessage={state.errors.title?.join(', ')}
             />
             <Textarea
-              name="description"
+              name="content"
+              label="Content"
+              placeholder="Content"
               labelPlacement="outside"
-              label="Description"
-              placeholder="Describe your topic"
-              isInvalid={!!state.errors.description}
-              errorMessage={state.errors.description?.join(', ')}
+              isInvalid={!!state.errors.content}
+              errorMessage={state.errors.content?.join(', ')}
             />
 
             {state.errors._form ? (
               <div className="rounded-md p-2 bg-[#f31260] bg-opacity-15 text-xs text-[#f31260]">
-                {state.errors._form?.join(', ')}
+                {state.errors._form.join(', ')}
               </div>
             ) : null}
 
