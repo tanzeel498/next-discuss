@@ -1,10 +1,11 @@
-"use client";
+'use client';
 
-import { useFormState } from "react-dom";
-import { useEffect, useRef, useState } from "react";
-import { Textarea, Button } from "@nextui-org/react";
-import FormButton from "@/components/common/form-button";
-import * as actions from "@/actions";
+import { useFormState } from 'react-dom';
+import { useEffect, useRef, useState } from 'react';
+import { Button } from '@nextui-org/button';
+import { Textarea } from '@nextui-org/input';
+import FormButton from '@/components/common/form-button';
+import * as actions from '@/actions';
 
 interface CommentCreateFormProps {
   postId: string;
@@ -35,19 +36,18 @@ export default function CommentCreateForm({
   }, [formState, startOpen]);
 
   const form = (
-    <form action={action} ref={ref}>
+    <form action={action} ref={ref} noValidate>
       <div className="space-y-2 px-1">
         <Textarea
           name="content"
-          label="Reply"
           placeholder="Enter your comment"
           isInvalid={!!formState.errors.content}
-          errorMessage={formState.errors.content?.join(", ")}
+          errorMessage={formState.errors.content?.join(', ')}
         />
 
         {formState.errors._form ? (
-          <div className="p-2 bg-red-200 border rounded border-red-400">
-            {formState.errors._form?.join(", ")}
+          <div className="rounded-md p-2 bg-[#f31260] bg-opacity-15 text-xs text-[#f31260]">
+            {formState.errors._form?.join(', ')}
           </div>
         ) : null}
 
